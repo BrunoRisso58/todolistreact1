@@ -11,6 +11,7 @@ export const Container = styles.div`
 
     .image {
         margin-right: 5px;
+        cursor: pointer;
     }
 
     input {
