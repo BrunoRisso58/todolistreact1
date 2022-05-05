@@ -6,7 +6,8 @@ export const Container = styles.div`
     padding: 10px;
     margin: 20px 0;
     display: flex;
-    align-items: center;
+    align-itens: center;
+    justify-content: space-between;
 
     .image {
         margin-right: 5px;

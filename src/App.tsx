@@ -1,14 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as C from './app.styles';
 import { Item } from './types/Item';
 import { ListItem } from './components/ListItem';
 import { AddArea } from './components/AddArea';
 
 const App = () => {
-  const [list, setList] = useState<Item[]>([
-    { id: 1, name: 'Comprar o pão na padaria', done: false },
-    { id: 2, name: 'Comprar um bolo na padaria', done: true }
-  ]);
+  const [list, setList] = useState<Item[]>([]);
 
   const handleAddTask = (taskName: string) => {
     let newList = [...list];
@@ -20,7 +17,6 @@ const App = () => {
     setList(newList);
   }
 
-  // Função feita para tarefinha de casa.
   const handleTaskChange = (id: number, done: boolean) => {
     let newList = [...list];
     for (let i in newList) {
@@ -28,6 +24,16 @@ const App = () => {
         newList[i].done = done;
       }
     }
+    setList(newList);
+  }
+
+  const removeTask = (id: number) => {
+    let newList = [...list];
+    newList.forEach((element, index) => {
+      if (newList[index].id == id) {
+        newList.splice(index, 1)
+      }
+    })
     setList(newList);
   }
 
@@ -39,7 +45,7 @@ const App = () => {
         <AddArea onEnter={handleAddTask} />
 
         {list.map((item, index) => (
-          <ListItem key={index} item={item} onChange={handleTaskChange} />
+          <ListItem key={index} item={item} onClick={removeTask} onChange={handleTaskChange} />
         ))}
 
       </C.Area>
